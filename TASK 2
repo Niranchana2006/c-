@@ -1,0 +1,47 @@
+GUESS THE NUMBER
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+void playNumberGuessingGame() {
+    srand(static_cast<unsigned>(time(0))); // Seed the random number generator
+    int randomNumber = rand() % 100 + 1;  // Generate a random number between 1 and 100
+    int userGuess;
+    int attempts = 0;
+
+    cout << "Welcome to the Number Guessing Game!" << endl;
+    cout << "I have generated a number between 1 and 100." << endl;
+    cout << "Try to guess it!" << endl;
+
+    // Main guessing loop
+    while (true) {
+        cout << "Enter your guess: ";
+        cin >> userGuess;
+        attempts++;
+
+        if (userGuess < randomNumber) {
+            cout << "Too low! Try again." << endl;
+        } else if (userGuess > randomNumber) {
+            cout << "Too high! Try again." << endl;
+        } else {
+            cout << "Congratulations! You guessed the number " << randomNumber << " in " << attempts << " attempts." << endl;
+            break;
+        }
+    }
+
+    // Ask if the user wants to play again
+    char playAgain;
+    cout << "Do you want to play again? (y/n): ";
+    cin >> playAgain;
+    if (playAgain == 'y' || playAgain == 'Y') {
+        playNumberGuessingGame(); // Recursive call to restart the game
+    } else {
+        cout << "Thank you for playing! Goodbye!" << endl;
+    }
+}
+
+int main() {
+    playNumberGuessingGame();
+    return 0;
+}
